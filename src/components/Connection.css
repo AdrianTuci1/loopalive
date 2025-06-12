@@ -1,0 +1,36 @@
+.connection-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1000;
+  overflow: visible;
+}
+
+.connection-path {
+  stroke: #666;
+  stroke-width: 2;
+  fill: none;
+  pointer-events: none;
+  transition: stroke 0.2s ease;
+}
+
+.connection-path.dragging {
+  stroke: #2196F3;
+  stroke-dasharray: 5, 5;
+  animation: dash 1s linear infinite;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: -10;
+  }
+}
+
+/* Hover effect for connections */
+.connection-path:hover {
+  stroke: #2196F3;
+  stroke-width: 3;
+} 

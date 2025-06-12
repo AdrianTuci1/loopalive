@@ -1,0 +1,509 @@
+.drum-machine-node {
+  min-width: 300px;
+}
+
+.drum-machine-content {
+  padding: 15px;
+}
+
+.drum-pads {
+  display: none !important;
+}
+
+.drum-pad {
+  display: none !important;
+}
+
+.pad-name {
+  display: none !important;
+}
+
+.pad-key {
+  display: none !important;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.play-button {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.play-button:hover {
+  background: #45a049;
+}
+
+.play-button.active {
+  background: #f44336;
+}
+
+.play-button.active:hover {
+  background: #da190b;
+}
+
+/* RD-6 Theme Styles */
+.rd6-theme {
+  background: #FFD600;
+  border-radius: 18px;
+  border: 2px solid #bfa000;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  padding: 18px 18px 12px 18px;
+  min-width: 480px;
+  max-width: 700px;
+}
+
+.rd6-top-row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-bottom: 18px;
+  gap: 8px;
+}
+
+.rd6-knob-group {
+  display: flex;
+  gap: 28px;
+}
+
+.rd6-knob {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 10px;
+  position: relative;
+  width: 60px;
+  height: 80px;
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+
+.rd6-knob svg {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.rd6-knob-label {
+  font-size: 12px;
+  font-weight: bold;
+  color: #222;
+  text-align: center;
+  margin-top: 2px;
+}
+
+.rd6-center-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.rd6-mode-selector {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.rd6-mode-knob {
+  width: 48px;
+  height: 48px;
+  background: #fffbe0;
+  border: 2px solid #bfa000;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  color: #222;
+}
+
+.rd6-smiley {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.rd6-controls {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.rd6-distortion, .rd6-volume {
+  background: #fffbe0;
+  border: 2px solid #bfa000;
+  border-radius: 8px;
+  padding: 6px 18px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 4px;
+  cursor: pointer;
+}
+
+.rd6-bottom-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-top: 18px;
+}
+
+.rd6-step-sequencer {
+  display: grid;
+  grid-template-columns: repeat(16, 1fr);
+  gap: 6px;
+  flex: 1;
+}
+
+.rd6-step-btn {
+  background: #fffbe0;
+  border: 2px solid #bfa000;
+  border-radius: 6px;
+  width: 32px;
+  height: 38px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #222;
+  cursor: pointer;
+  transition: background 0.15s, border 0.15s;
+}
+
+.rd6-step-btn:hover {
+  background: #ffe066;
+  border-color: #ffb300;
+}
+
+.rd6-play-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-left: 18px;
+}
+
+.rd6-play, .rd6-stop {
+  background: #fffbe0;
+  border: 2px solid #bfa000;
+  border-radius: 8px;
+  padding: 6px 18px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #222;
+  cursor: pointer;
+}
+
+.rd6-play:hover, .rd6-stop:hover {
+  background: #ffe066;
+  border-color: #ffb300;
+}
+
+.pattern-interpolation-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 32px auto 0 auto;
+  width: max-content;
+  background: none;
+}
+.pattern-row {
+  display: flex;
+  gap: 4px;
+}
+.pattern-cell {
+  background: #232323;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.10);
+  padding: 2px;
+  width: 48px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mini-step-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  width: 44px;
+  height: 24px;
+}
+.mini-step-row {
+  display: flex;
+  gap: 1px;
+}
+.mini-step-cell {
+  width: 2px;
+  height: 3px;
+  background: #444;
+  border-radius: 1px;
+}
+
+.open-grid-btn {
+  margin: 24px auto 0 auto;
+  display: block;
+  background: #FFD600;
+  color: #222;
+  font-weight: bold;
+  border: 2px solid #bfa000;
+  border-radius: 8px;
+  padding: 10px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: background 0.2s, border 0.2s;
+}
+.open-grid-btn:hover {
+  background: #ffe066;
+  border-color: #ffb300;
+}
+
+.pattern-modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.65);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pattern-modal-content {
+  background: #181818;
+  border-radius: 16px;
+  padding: 32px 32px 24px 32px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.close-modal-btn {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  background: none;
+  border: none;
+  color: #FFD600;
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10;
+  transition: color 0.2s;
+}
+.close-modal-btn:hover {
+  color: #fffbe0;
+}
+
+.mini-sequencer-monitor {
+  margin: 24px auto 0 auto;
+  background: #232323;
+  border-radius: 8px;
+  padding: 16px 18px 12px 18px;
+  width: max-content;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.mini-sequencer-labels {
+  margin-bottom: 8px;
+}
+.knob-select {
+  margin-top: 6px;
+  width: 80px;
+  background: #fffbe0;
+  border: 1px solid #bfa000;
+  border-radius: 4px;
+  font-size: 13px;
+  color: #222;
+  padding: 2px 6px;
+}
+.mini-sequencer-steps {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+.mini-seq-step {
+  width: 18px;
+  height: 18px;
+  background: #444;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.15s;
+  border: 1.5px solid #bfa000;
+}
+.mini-seq-step.active {
+  background: #FFD600;
+  border-color: #ffb300;
+}
+.mini-seq-step:hover {
+  background: #ffe066;
+}
+.mini-sequencer-measure {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+.mini-sequencer-measure input[type="range"] {
+  accent-color: #FFD600;
+  width: 120px;
+  margin: 0 6px;
+}
+
+/* RD-6-AM Mockup Styles */
+.rd6-mockup {
+  background: #FFD600;
+  border-radius: 18px;
+  border: 2.5px solid #bfa000;
+  box-shadow: 0 6px 32px rgba(0,0,0,0.18);
+  padding: 32px 32px 18px 32px;
+  min-width: 700px;
+  max-width: 900px;
+  font-family: 'Montserrat', 'Arial', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  position: relative;
+}
+
+.rd6-mock-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 18px;
+  gap: 18px;
+}
+
+.rd6-mock-knob {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70px;
+  margin: 0 4px;
+}
+.rd6-mock-knob svg {
+  margin-bottom: 2px;
+}
+.rd6-mock-knob-label {
+  font-size: 12px;
+  font-weight: bold;
+  color: #222;
+  margin-top: 2px;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+.rd6-mock-center-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.rd6-mock-mode {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+}
+.rd6-mock-smiley {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+.rd6-mock-distortion-volume {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.rd6-mock-jacks-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0 18px 0;
+  padding: 0 10px;
+}
+.rd6-mock-jack {
+  width: 18px;
+  height: 18px;
+  background: #222;
+  border-radius: 50%;
+  border: 2px solid #fffbe0;
+  box-shadow: 0 1px 2px #bfa000;
+}
+
+.rd6-mock-step-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 18px 0;
+  gap: 8px;
+}
+.rd6-mock-step-btn {
+  width: 36px;
+  height: 36px;
+  background: #fffbe0;
+  border: 2px solid #bfa000;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.10);
+  cursor: pointer;
+  transition: background 0.15s, border 0.15s;
+  position: relative;
+}
+.rd6-mock-step-btn:hover {
+  background: #ffe066;
+  border-color: #ffb300;
+}
+.rd6-mock-step-label {
+  font-size: 13px;
+  font-weight: bold;
+  color: #222;
+  user-select: none;
+}
+
+.rd6-mock-func-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  gap: 10px;
+}
+.rd6-mock-func-btn {
+  background: #fffbe0;
+  border: 2px solid #bfa000;
+  border-radius: 6px;
+  padding: 7px 18px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #222;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  cursor: pointer;
+  transition: background 0.15s, border 0.15s;
+  text-align: center;
+  min-width: 70px;
+}
+.rd6-mock-func-btn:hover {
+  background: #ffe066;
+  border-color: #ffb300;
+}
+
+/* Smiley SVG tweaks */
+.rd6-mock-smiley svg {
+  display: block;
+} 

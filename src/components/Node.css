@@ -1,0 +1,170 @@
+.node {
+  padding: 10px;
+  border-radius: 8px;
+  background: #2a2a2a;
+  border: 1px solid #3a3a3a;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  min-width: 200px;
+}
+
+.node-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #3a3a3a;
+}
+
+.drag-handle {
+  cursor: move;
+  color: #666;
+  display: flex;
+  align-items: center;
+}
+
+.drag-handle:hover {
+  color: #888;
+}
+
+.node-title {
+  flex: 1;
+  font-weight: 500;
+  color: #fff;
+  font-size: 14px;
+}
+
+.delete-button {
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.delete-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ff4444;
+}
+
+.node-content {
+  min-width: 150px;
+  min-height: 50px;
+  color: #ccc;
+}
+
+.node-handle {
+  width: 8px;
+  height: 8px;
+  background: #555;
+  border: 2px solid #2a2a2a;
+  transition: all 0.2s ease;
+}
+
+.node-handle:hover {
+  background: #007bff;
+  border-color: #2a2a2a;
+}
+
+.node-ports {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.node-ports .port {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: #4a4a4a;
+  border: 2px solid #666;
+  border-radius: 50%;
+  pointer-events: all;
+  cursor: crosshair;
+  transition: all 0.2s ease;
+}
+
+.node-ports .port:hover {
+  background: #666;
+  border-color: #888;
+  transform: scale(1.2);
+}
+
+.node-ports .port[data-type="input"] {
+  left: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.node-ports .port[data-type="output"] {
+  right: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.node-ports .port[data-type="input"]:hover {
+  transform: translateY(-50%) scale(1.2);
+}
+
+.node-ports .port[data-type="output"]:hover {
+  transform: translateY(-50%) scale(1.2);
+}
+
+.node-port {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: #4a9eff;
+  border: 2px solid #2a2a2a;
+  border-radius: 50%;
+  cursor: crosshair;
+  transition: all 0.2s ease;
+}
+
+.node-port:hover {
+  background: #66b3ff;
+  transform: scale(1.2);
+}
+
+/* Port positions */
+.node-port.right {
+  top: 50%;
+  right: -6px;
+  transform: translateY(-50%);
+}
+
+.node-port.left {
+  top: 50%;
+  left: -6px;
+  transform: translateY(-50%);
+}
+
+.node-port.top {
+  left: 50%;
+  top: -6px;
+  transform: translateX(-50%);
+}
+
+.node-port.bottom {
+  left: 50%;
+  bottom: -6px;
+  transform: translateX(-50%);
+}
+
+.node-port.right:hover,
+.node-port.left:hover {
+  transform: translateY(-50%) scale(1.2);
+}
+
+.node-port.top:hover,
+.node-port.bottom:hover {
+  transform: translateX(-50%) scale(1.2);
+} 
