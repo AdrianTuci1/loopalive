@@ -1,0 +1,103 @@
+.dd8-mockup {
+  background: #1a1a1a;
+  border: 2px solid #333;
+  border-radius: 8px;
+  padding: 15px;
+  min-width: 400px;
+  color: #ccc;
+}
+
+.dd8-header {
+  text-align: center;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #333;
+  padding-bottom: 10px;
+}
+
+.dd8-header h3 {
+  margin: 0;
+  color: #ff6b6b;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.dd8-controls {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.dd8-section {
+  flex: 1;
+  padding: 0 10px;
+}
+
+.dd8-section h4 {
+  margin: 0 0 10px 0;
+  color: #ff6b6b;
+  font-size: 0.9em;
+  text-align: center;
+}
+
+.dd8-knob {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.dd8-knob-label {
+  margin-top: 5px;
+  font-size: 0.8em;
+  color: #999;
+}
+
+.dd8-mode-switch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.dd8-mode-indicator {
+  width: 12px;
+  height: 12px;
+  background: #333;
+  border: 1px solid #666;
+  border-radius: 50%;
+  margin-bottom: 5px;
+}
+
+.dd8-mode-label {
+  font-size: 0.8em;
+  color: #999;
+}
+
+.dd8-footswitches {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  background: #222;
+  border-radius: 4px;
+}
+
+.dd8-footswitch {
+  width: 40px;
+  height: 40px;
+  background: #333;
+  border: 1px solid #444;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.dd8-footswitch:hover {
+  background: #444;
+}
+
+/* Node handle styling */
+.node-handle {
+  width: 8px;
+  height: 8px;
+  background: #ff6b6b;
+  border: 1px solid #333;
+} 

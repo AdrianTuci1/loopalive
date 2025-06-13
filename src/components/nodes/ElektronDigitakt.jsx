@@ -1,5 +1,4 @@
 import React from 'react';
-import { Handle, Position } from 'reactflow';
 import '../Node.css';
 import './ElektronDigitakt.css';
 
@@ -66,8 +65,6 @@ const ElektronDigitakt = () => (
         <StepButton key={i} label={i+1} />
       ))}
     </div>
-    <Handle type="source" position={Position.Right} className="node-handle" />
-    <Handle type="target" position={Position.Left} className="node-handle" />
   </div>
 );
 

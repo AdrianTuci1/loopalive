@@ -1,6 +1,6 @@
 import React from 'react';
 import { usePatternGridModal } from './PatternGridModalProvider';
-import './nodes/BehringerTd3.css'; // Reuse modal/grid styles
+import './nodes/BehringerRd6.css'; // Reuse modal/grid styles
 
 // Mini step sequencer grid for each cell
 const MiniStepGrid = () => (

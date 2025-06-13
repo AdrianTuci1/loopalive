@@ -13,6 +13,13 @@ const useStore = create((set) => ({
   // Node menu state
   isNodeMenuOpen: false,
 
+  // Node dragging state
+  nodesDraggable: true,
+  flowDraggable: true,
+
+  // Node selection state
+  selectedNodeId: null,
+
   // Actions
   addNode: (nodeType) => {
     const newNode = {
@@ -75,6 +82,16 @@ const useStore = create((set) => ({
 
   toggleNodeMenu: () => set((state) => ({
     isNodeMenuOpen: !state.isNodeMenuOpen
+  })),
+
+  toggleNodesDraggable: () => set((state) => ({
+    nodesDraggable: !state.nodesDraggable
+  })),
+
+  setSelectedNode: (nodeId) => set((state) => ({
+    selectedNodeId: nodeId,
+    nodesDraggable: nodeId === null,
+    flowDraggable: nodeId === null
   })),
 
   updateNodes: (newNodes) => set({ nodes: newNodes })

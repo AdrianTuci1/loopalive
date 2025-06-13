@@ -1,14 +1,8 @@
 import React from 'react';
 import './NodeMenu.css';
+import { nodeMenuItems } from '../config/nodes';
 
 const NodeMenu = ({ onClose, onAddNode }) => {
-  const nodeTypes = [
-    { id: 'BehringerTd3', label: 'Behringer Td3' },
-    { id: 'ElektronDigitakt', label: 'Elektron Digitakt' },
-    { id: 'Synth', label: 'Synth' },
-    { id: 'Effect', label: 'Effect' }
-  ];
-
   return (
     <div className="node-menu-drawer">
       <div className="node-menu-header">
@@ -16,7 +10,7 @@ const NodeMenu = ({ onClose, onAddNode }) => {
         <button className="close-button" onClick={onClose}>×</button>
       </div>
       <div className="node-menu-content">
-        {nodeTypes.map(type => (
+        {nodeMenuItems.map(type => (
           <div
             key={type.id}
             className="node-type"

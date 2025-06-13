@@ -1,0 +1,120 @@
+.xenyx-mockup {
+  background: #1a1a1a;
+  border: 2px solid #333;
+  border-radius: 8px;
+  padding: 15px;
+  min-width: 500px;
+  color: #ccc;
+}
+
+.xenyx-header {
+  text-align: center;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #333;
+  padding-bottom: 10px;
+}
+
+.xenyx-header h3 {
+  margin: 0;
+  color: #00ff00;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.xenyx-channels {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.xenyx-channel {
+  flex: 1;
+  background: #222;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.xenyx-channel-strip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.xenyx-channel-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.xenyx-knob {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 5px 0;
+}
+
+.xenyx-knob-label {
+  margin-top: 3px;
+  font-size: 0.7em;
+  color: #999;
+}
+
+.xenyx-fader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 120px;
+  margin-top: 10px;
+}
+
+.xenyx-fader-track {
+  width: 20px;
+  height: 100px;
+  background: #333;
+  border: 1px solid #444;
+  border-radius: 2px;
+  position: relative;
+}
+
+.xenyx-fader-knob {
+  width: 30px;
+  height: 10px;
+  background: #666;
+  border: 1px solid #888;
+  border-radius: 2px;
+  position: absolute;
+  left: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.xenyx-fader-label {
+  margin-top: 5px;
+  font-size: 0.8em;
+  color: #999;
+}
+
+.xenyx-master {
+  flex: 1;
+  background: #222;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.xenyx-master-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Node handle styling */
+.node-handle {
+  width: 8px;
+  height: 8px;
+  background: #00ff00;
+  border: 1px solid #333;
+} 

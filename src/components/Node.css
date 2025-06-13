@@ -1,37 +1,55 @@
 .node {
-  padding: 10px;
+  background: #1a1a1a;
+  border: 1px solid #333;
   border-radius: 8px;
-  background: #2a2a2a;
-  border: 1px solid #3a3a3a;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  padding: 0;
   min-width: 200px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.node.selected {
+  border: 2px solid #1a192b;
+  box-shadow: 0 0 0 2px #1a192b;
 }
 
 .node-header {
+  background: #2c2c2c;
+  padding: 8px 12px;
+  border-radius: 8px 8px 0 0;
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 8px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid #3a3a3a;
+  justify-content: space-between;
+  cursor: move;
+  user-select: none;
+  border-bottom: 1px solid #333;
+}
+
+.node-content {
+  padding: 12px;
+  cursor: default;
+  user-select: none;
+}
+
+.node-content.selected {
+  border: 2px solid #1a192b;
+  box-shadow: 0 0 0 2px #1a192b;
+  background-color: rgba(26, 25, 43, 0.05);
 }
 
 .drag-handle {
-  cursor: move;
-  color: #666;
   display: flex;
   align-items: center;
-}
-
-.drag-handle:hover {
-  color: #888;
+  color: #666;
+  cursor: move;
 }
 
 .node-title {
-  flex: 1;
-  font-weight: 500;
   color: #fff;
   font-size: 14px;
+  font-weight: 500;
+  margin: 0 8px;
+  flex: 1;
 }
 
 .delete-button {
@@ -52,23 +70,41 @@
   color: #ff4444;
 }
 
-.node-content {
-  min-width: 150px;
-  min-height: 50px;
-  color: #ccc;
-}
-
 .node-handle {
   width: 8px;
   height: 8px;
-  background: #555;
-  border: 2px solid #2a2a2a;
+  background: #666;
+  border: 2px solid #333;
+  border-radius: 50%;
   transition: all 0.2s ease;
 }
 
 .node-handle:hover {
-  background: #007bff;
-  border-color: #2a2a2a;
+  background: #FFD600;
+  border-color: #FFD600;
+  transform: scale(1.2);
+}
+
+/* Ensure knob interactions work */
+.knob {
+  cursor: pointer;
+  user-select: none;
+  pointer-events: auto;
+}
+
+/* Prevent drag on knob elements */
+.knob * {
+  pointer-events: none;
+}
+
+/* Ensure step buttons are clickable */
+.rd6-step-button {
+  pointer-events: auto;
+}
+
+/* Ensure function buttons are clickable */
+.rd6-function-button {
+  pointer-events: auto;
 }
 
 .node-ports {
