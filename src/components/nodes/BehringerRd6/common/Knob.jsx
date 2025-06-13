@@ -14,6 +14,7 @@ const Knob = ({
 }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
+  const [startY, setStartY] = useState(0);
   const [currentValue, setCurrentValue] = useState(value);
 
   useEffect(() => {
@@ -25,14 +26,19 @@ const Knob = ({
     e.stopPropagation();
     setIsDragging(true);
     setStartX(e.clientX);
+    setStartY(e.clientY);
   }, []);
 
   const handleMouseMove = useCallback((e) => {
     if (!isDragging) return;
 
     const deltaX = e.clientX - startX;
+    const deltaY = e.clientY - startY;
+    const delta = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+    const direction = Math.sign(deltaX);
+    
     const stepSize = (max - min) / steps;
-    const valueChange = Math.round(deltaX / 2) * stepSize;
+    const valueChange = Math.round(delta / 2) * stepSize * direction;
     
     let newValue = currentValue + valueChange;
     // Ensure value stays between min and max
@@ -40,7 +46,7 @@ const Knob = ({
     
     setCurrentValue(newValue);
     onChange(newValue);
-  }, [isDragging, startX, currentValue, max, min, steps, onChange]);
+  }, [isDragging, startX, startY, currentValue, max, min, steps, onChange]);
 
   const handleMouseUp = useCallback(() => {
     setIsDragging(false);

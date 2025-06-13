@@ -31,8 +31,8 @@
 }
 
 .rd6-track-notation {
-  position: absolute;
-  bottom: 75px;
+  position: relative;
+  bottom: 45px;
 }
 
 
@@ -43,7 +43,6 @@
 }
 
 .rd6-tempo-notation {
-  position: inherit;
   bottom: 0;
   width: 100%;
   display: flex;
