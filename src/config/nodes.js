@@ -1,4 +1,4 @@
-import BehringerRd6 from '../components/nodes/BehringerRd6';
+import BehringerRd6 from '../components/nodes/BehringerRd6/BehringerRd6';
 import ElektronDigitakt from '../components/nodes/ElektronDigitakt';
 import BehringerTd3 from '../components/nodes/BehringerTd3';
 import StrymonBlueSky from '../components/nodes/StrymonBlueSky';

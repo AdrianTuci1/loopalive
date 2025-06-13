@@ -1,0 +1,33 @@
+.measure-visualization {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background-color: #2a2a2a;
+  border-radius: 4px;
+}
+
+.measure-row {
+  display: flex;
+  gap: 2px;
+  height: 30px;
+  border-radius: 2px;
+}
+
+.measure-column {
+  display: flex;
+  background-color: #333;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.measure-cell {
+  flex: 1;
+  background-color: #1e1d1d;
+  opacity: 1;
+  border-right: 1px solid rgba(0, 0, 0, 0.2);
+
+}
+
+.measure-cell:last-child {
+  border-right: none;
+} 

@@ -2,24 +2,7 @@ import React from 'react';
 import '../Node.css';
 import './BehringerTd3.css';
 import useTd3Synth from '../../hooks/useTd3Synth';
-
-const Knob = ({ label, value, onChange }) => (
-  <div className="td3-knob">
-    <svg width="40" height="40" viewBox="0 0 40 40">
-      <circle cx="20" cy="20" r="18" fill="#2c2c2c" stroke="#666" strokeWidth="2" />
-      <rect 
-        x="19" 
-        y="5" 
-        width="2" 
-        height="10" 
-        rx="1" 
-        fill="#666"
-        style={{ transform: `rotate(${value * 270}deg)`, transformOrigin: '20px 20px' }}
-      />
-    </svg>
-    <span className="td3-knob-label">{label}</span>
-  </div>
-);
+import Knob from './BehringerRd6/common/Knob';
 
 const Switch = ({ label, isOn, onChange }) => (
   <div className="td3-switch" onClick={() => onChange(!isOn)}>
@@ -40,19 +23,19 @@ const BehringerTd3 = () => {
       <div className="td3-controls">
         <div className="td3-section">
           <h4>OSCILLATOR</h4>
-          <Knob label="TUNE" value={params.tune} onChange={(v) => handleKnobChange('tune', v)} />
-          <Knob label="CUTOFF" value={params.cutoff} onChange={(v) => handleKnobChange('cutoff', v)} />
-          <Knob label="RESONANCE" value={params.resonance} onChange={(v) => handleKnobChange('resonance', v)} />
-          <Knob label="ENV MOD" value={params.envMod} onChange={(v) => handleKnobChange('envMod', v)} />
-          <Knob label="DECAY" value={params.decay} onChange={(v) => handleKnobChange('decay', v)} />
-          <Knob label="ACCENT" value={params.accent} onChange={(v) => handleKnobChange('accent', v)} />
+          <Knob label="TUNE" value={params.tune * 100} onChange={(v) => handleKnobChange('tune', v / 100)} min={0} max={100} steps={5} />
+          <Knob label="CUTOFF" value={params.cutoff * 100} onChange={(v) => handleKnobChange('cutoff', v / 100)} min={0} max={100} steps={5} />
+          <Knob label="RESONANCE" value={params.resonance * 100} onChange={(v) => handleKnobChange('resonance', v / 100)} min={0} max={100} steps={5} />
+          <Knob label="ENV MOD" value={params.envMod * 100} onChange={(v) => handleKnobChange('envMod', v / 100)} min={0} max={100} steps={5} />
+          <Knob label="DECAY" value={params.decay * 100} onChange={(v) => handleKnobChange('decay', v / 100)} min={0} max={100} steps={5} />
+          <Knob label="ACCENT" value={params.accent * 100} onChange={(v) => handleKnobChange('accent', v / 100)} min={0} max={100} steps={5} />
         </div>
 
         <div className="td3-section">
           <h4>LFO</h4>
-          <Knob label="RATE" value={params.lfoRate} onChange={(v) => handleKnobChange('lfoRate', v)} />
-          <Knob label="DELAY" value={params.lfoDelay} onChange={(v) => handleKnobChange('lfoDelay', v)} />
-          <Knob label="WAVE" value={params.lfoWave} onChange={(v) => handleKnobChange('lfoWave', v)} />
+          <Knob label="RATE" value={params.lfoRate * 100} onChange={(v) => handleKnobChange('lfoRate', v / 100)} min={0} max={100} steps={5} />
+          <Knob label="DELAY" value={params.lfoDelay * 100} onChange={(v) => handleKnobChange('lfoDelay', v / 100)} min={0} max={100} steps={5} />
+          <Knob label="WAVE" value={params.lfoWave * 100} onChange={(v) => handleKnobChange('lfoWave', v / 100)} min={0} max={100} steps={5} />
         </div>
 
         <div className="td3-section">

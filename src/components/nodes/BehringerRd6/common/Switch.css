@@ -1,0 +1,62 @@
+.switch-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.switch {
+  width: 50px;
+  height: 25px;
+  background-color: #2a2a2a;
+  border-radius: 12.5px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 2px solid #666;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.switch.on {
+  background-color: var(--switch-color);
+  border-color: var(--switch-color);
+}
+
+.switch-handle {
+  width: 21px !important;
+  height: 21px !important;
+  background: linear-gradient(to bottom, #fff 0%, #ccc 100%);
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  border: 1px solid #999;
+}
+
+.switch.on .switch-handle {
+  transform: translateX(25px);
+}
+
+.switch-label {
+  font-size: 12px;
+  color: #666;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* Add hover effect */
+.switch:hover {
+  border-color: var(--switch-color);
+}
+
+/* Add active effect */
+.switch:active .switch-handle {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  transform: scale(0.95);
+}
+
+.switch.on:active .switch-handle {
+  transform: translateX(25px) scale(0.95);
+} 

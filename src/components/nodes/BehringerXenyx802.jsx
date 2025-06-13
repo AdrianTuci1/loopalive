@@ -1,5 +1,4 @@
 import React from 'react';
-import { Handle, Position } from 'reactflow';
 import '../Node.css';
 import './BehringerXenyx802.css';
 
@@ -66,8 +65,6 @@ const BehringerXenyx802 = () => (
       </div>
     </div>
 
-    <Handle type="source" position={Position.Right} className="node-handle" />
-    <Handle type="target" position={Position.Left} className="node-handle" />
   </div>
 );
 

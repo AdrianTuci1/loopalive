@@ -1,0 +1,130 @@
+.step-sequencer {
+  padding: 20px;
+  background-color: #1a1a1a;
+  border-radius: 4px;
+  box-shadow: 
+    inset 0 0 15px rgba(0, 0, 0, 0.7),
+    0 2px 4px rgba(0, 0, 0, 0.3);
+  border: 1px solid #333;
+}
+
+.step-grid {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.step-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.led-slot {
+  width: 24px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.led-button {
+  width: 10px;
+  height: 10px;
+  background-color: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 50%;
+  transition: all 0.15s ease;
+  box-shadow: 
+    inset 0 0 3px rgba(0, 0, 0, 0.5),
+    0 0 2px rgba(0, 0, 0, 0.3);
+}
+
+.led-button.active {
+  background-color: #FFD600;
+  border-color: #FFD600;
+  box-shadow: 
+    0 0 8px rgba(255, 214, 0, 0.6),
+    inset 0 0 4px rgba(255, 214, 0, 0.8);
+}
+
+.button-slot {
+  width: 24px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Override StepButton styles */
+.step-buttons button {
+  width: 24px !important;
+  height: 72px !important;
+  border-radius: 2px !important;
+  background-color: #2a2a2a !important;
+  border: 1px solid #333 !important;
+  box-shadow: 
+    inset 0 1px 3px rgba(255, 255, 255, 0.1),
+    inset 0 -1px 3px rgba(0, 0, 0, 0.3),
+    0 1px 2px rgba(0, 0, 0, 0.2) !important;
+  transition: all 0.1s ease !important;
+  padding: 0 !important;
+  cursor: pointer !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  position: relative !important;
+}
+
+.step-buttons button::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(0, 0, 0, 0.1) 100%
+  ) !important;
+  border-radius: 2px !important;
+}
+
+.step-buttons button:hover {
+  border-color: #444 !important;
+  background-color: #333 !important;
+}
+
+.step-buttons button.active {
+  background-color: #FFD600 !important;
+  border-color: #FFD600 !important;
+  box-shadow: 
+    0 0 10px rgba(255, 214, 0, 0.3),
+    inset 0 1px 3px rgba(255, 255, 255, 0.2),
+    inset 0 -1px 3px rgba(0, 0, 0, 0.2) !important;
+}
+
+.step-buttons button:active,
+.step-buttons button.isPressed {
+  transform: translateY(1px) !important;
+  box-shadow: 
+    inset 0 2px 4px rgba(0, 0, 0, 0.4),
+    inset 0 -1px 2px rgba(255, 255, 255, 0.05) !important;
+}
+
+.number-slot {
+  width: 24px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-number {
+  color: #666;
+  font-size: 10px;
+  font-weight: bold;
+  font-family: 'Courier New', monospace;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+} 

@@ -1,0 +1,92 @@
+.rd6-select-frame,
+.rd6-track-frame,
+.rd6-tempo-frame,
+.rd6-volume-frame,
+.rd6-distortion-frame,
+.rd6-measure-frame,
+.rd6-pattern-frame,
+.rd6-write-frame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 180px; /* Consistent height for all frames */
+  padding: 10px;
+  background: #2a2a2a;
+  border: 2px solid #FFD600;
+  border-radius: 8px;
+  margin: 5px;
+  box-shadow: 0 0 5px rgba(255, 214, 0, 0.2);
+}
+
+.rd6-select-frame,
+.rd6-track-frame {
+  width: 140px; /* Slightly wider for select and track */
+}
+
+.rd6-tempo-frame,
+.rd6-volume-frame,
+.rd6-distortion-frame {
+  width: 160px; /* Standard width for other frames */
+}
+
+/* Frame labels */
+.rd6-tempo-label,
+.rd6-select-label,
+.rd6-track-label,
+.rd6-volume-label,
+.rd6-distortion-label {
+  color: #FFD600;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* Notations */
+.rd6-tempo-notation,
+.rd6-select-notation,
+.rd6-track-notation {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 10px;
+  color: #888;
+  font-size: 12px;
+}
+
+.rd6-track-notation {
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  position: relative;
+}
+
+/* Center row layout */
+.rd6-center-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px 0;
+} 
+
+
+.rd6-track-frame {
+  width: 200px;
+}
+
+.rd6-select-frame {
+  width: 150px;
+}
+
+.rd6-button-placement {
+  position: relative;
+  z-index: 5;
+  top: 20px;
+}
+
+.rd6-select-frame {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

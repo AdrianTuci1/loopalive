@@ -1,0 +1,275 @@
+/* RD-6 General Styles */
+.rd6-mockup {
+  background: #1a1a1a;
+  border-radius: 8px;
+  min-width: 600px;
+  position: relative;
+}
+
+.rd6-header {
+  text-align: center;
+  padding: 10px;
+  background: #2c2c2c;
+  border-bottom: 2px solid #FFD600;
+  margin-bottom: 20px;
+}
+
+.rd6-header h3 {
+  margin: 0;
+  color: #FFD600;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.rd6-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.rd6-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.rd6-center-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  margin: 10px 0;
+}
+
+.rd6-smiley {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 20px;
+}
+
+.rd6-smiley svg {
+  width: 50px;
+  height: 50px;
+}
+
+.rd6-sequencer {
+  background: #2c2c2c;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.rd6-step-buttons {
+  display: grid;
+  grid-template-columns: repeat(16, 1fr);
+  gap: 5px;
+}
+
+.rd6-step-button {
+  width: 30px;
+  height: 30px;
+  background: #1a1a1a;
+  border: 2px solid #666;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  pointer-events: auto;
+}
+
+.rd6-step-button:hover {
+  border-color: #FFD600;
+  color: #FFD600;
+}
+
+.rd6-step-button.active {
+  background: #FFD600;
+  border-color: #FFD600;
+  color: #000;
+}
+
+.rd6-function-buttons {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  padding: 20px;
+  background: #2c2c2c;
+  border-radius: 8px;
+}
+
+.rd6-function-button {
+  padding: 10px;
+  background: #1a1a1a;
+  border: 2px solid #666;
+  border-radius: 4px;
+  color: #666;
+  font-size: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  pointer-events: auto;
+}
+
+.rd6-function-button:hover {
+  border-color: #FFD600;
+  color: #FFD600;
+}
+
+.rd6-function-button.active {
+  background: #FFD600;
+  border-color: #FFD600;
+  color: #000;
+}
+
+.rd6-jack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 10px;
+}
+
+.rd6-jack-hole {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #333;
+  border: 2px solid #666;
+  margin-bottom: 4px;
+}
+
+.rd6-jack-label {
+  font-size: 10px;
+  color: #666;
+  text-transform: uppercase;
+}
+
+/* Three columns layout */
+.rd6-three-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr 1fr;
+  margin-top: 20px;
+  background: #2c2c2c;
+  border-radius: 8px;
+}
+
+/* First column - Control buttons */
+.rd6-control-column {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Second column - Measure switch and button */
+.rd6-measure-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.rd6-measure-switch-group {
+  background: #1a1a1a;
+  padding: 15px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rd6-measure-switch {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rd6-measure-labels {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.rd6-measure-labels span {
+  color: #FFD600;
+  font-size: 14px;
+  font-weight: bold;
+  width: 20px;
+  text-align: center;
+}
+
+/* Third column - Measure visualization and sequencer */
+.rd6-sequencer-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.rd6-measure-visualization {
+  background: #1a1a1a;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.rd6-measure-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.rd6-measure-cell {
+  background: #2a2a2a;
+  border: 2px solid #666;
+  border-radius: 4px;
+  padding: 10px;
+  text-align: center;
+  color: #666;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+.rd6-measure-cell.active {
+  background: #FFD600;
+  border-color: #FFD600;
+  color: #000;
+}
+
+.rd6-sequencer-row {
+  background: #1a1a1a;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+/* Common group styles */
+.rd6-reset-group,
+.rd6-start-stop-group,
+.rd6-pattern-group,
+.rd6-write-group,
+.rd6-measure-button-group {
+  background: #1a1a1a;
+  padding: 15px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rd6-group-label {
+  color: #FFD600;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.rd6-group-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
