@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { createDrumSounds } from './sounds/drumSounds';
+import { drumSounds } from '../audio';
 import { stepSequencerState } from './StepSequencerState';
 
 // Groovebox control logic
@@ -27,7 +27,7 @@ const useBehringerRd6 = () => {
     masterGainRef.current.connect(audioContextRef.current.destination);
     masterGainRef.current.gain.value = volume;
 
-    drumSoundsRef.current = createDrumSounds(audioContextRef.current);
+    drumSoundsRef.current = drumSounds(audioContextRef.current);
 
     // Initialize step sequencer state
     stepSequencerState.setSelectedTrack(1);
@@ -61,19 +61,19 @@ const useBehringerRd6 = () => {
     let output;
     switch (drumType) {
       case 'kick':
-        output = drumSoundsRef.current.create808Kick(now);
+        output = drumSoundsRef.current.createBassDrum(now);
         break;
       case 'snare':
-        output = drumSoundsRef.current.create808Snare(now);
+        output = drumSoundsRef.current.createSnareDrum(now);
         break;
       case 'bass':
-        output = drumSoundsRef.current.create808Bass(now);
+        output = drumSoundsRef.current.createLowTom(now);
         break;
       case 'clap':
-        output = drumSoundsRef.current.create808Clap(now);
+        output = drumSoundsRef.current.createClap(now);
         break;
       case 'hihat':
-        output = drumSoundsRef.current.create808HiHat(now);
+        output = drumSoundsRef.current.createHiHat(now);
         break;
     }
 

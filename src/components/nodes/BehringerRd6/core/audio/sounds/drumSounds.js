@@ -214,4 +214,7 @@ export const createDrumSounds = (ctx) => {
     createClap,
     createHiHat
   };
-}; 
+};
+
+// Add default export
+export default createDrumSounds; 

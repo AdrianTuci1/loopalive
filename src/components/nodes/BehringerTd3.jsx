@@ -2,7 +2,8 @@ import React from 'react';
 import '../Node.css';
 import './BehringerTd3.css';
 import useTd3Synth from '../../hooks/useTd3Synth';
-import Knob from './BehringerRd6/common/Knob';
+import { Knob } from './BehringerRd6';
+
 
 const Switch = ({ label, isOn, onChange }) => (
   <div className="td3-switch" onClick={() => onChange(!isOn)}>

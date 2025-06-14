@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useStepSequencer } from './StepSequencerState';
 import './StepSequencer.css';
+import { useStepSequencer } from '../../../core/state/StepSequencerState';
 
 const StepSequencer = ({ onStepTrigger }) => {
   const {

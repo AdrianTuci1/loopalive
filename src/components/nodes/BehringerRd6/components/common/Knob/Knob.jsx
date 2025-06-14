@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './Knob.css';
 
-const Knob = ({
+export const Knob = ({
   label,
   value,
   onChange,
@@ -166,4 +166,3 @@ const Knob = ({
   );
 };
 
-export default Knob; 

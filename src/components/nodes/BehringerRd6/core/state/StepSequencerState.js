@@ -68,7 +68,7 @@ export const useStepSequencer = create((set, get) => ({
   }
 }));
 
-class StepSequencerState {
+export class StepSequencerState {
   constructor() {
     this.observers = new Set();
     this.trackMapping = {

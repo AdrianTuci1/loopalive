@@ -1,80 +1,122 @@
-import React, { useRef, useEffect } from 'react';
-import '../../Node.css';
-import './BehringerRd6.css';
-import './BehringerRd6.frames.css';
-import './BehringerRd6.notations.css';
-import Knob from './common/Knob';
-import Switch from './common/Switch';
-import FourPositionSwitch from './common/FourPositionSwitch';
-import { FunctionButton, Jack } from './common/Buttons';
-import TempoFrame from './frames/TempoFrame';
-import SelectFrame from './frames/SelectFrame';
-import TrackFrame from './frames/TrackFrame';
-import MeasureFrame from './frames/MeasureFrame';
-import PatternFrame from './frames/PatternFrame';
-import WriteFrame from './frames/WriteFrame';
-import VolumeFrame from './frames/VolumeFrame';
-import DistortionFrame from './frames/DistortionFrame';
-import StepSequencer from './StepSequencer';
-import MeasureVisualization from './MeasureVisualization';
-import { createDrumSounds } from './sounds/drumSounds';
+import React, { useRef, useEffect, useState } from 'react';
+import '../../../../Node.css';
+import '../../styles/BehringerRd6.css';
+import '../../styles/BehringerRd6.frames.css';
+import '../../styles/BehringerRd6.notations.css';
+
+// Import all components and utilities from the main index
+import {
+  // Common components
+  Knob,
+  Switch,
+  FourPositionSwitch,
+  FunctionButton,
+  Jack,
+  
+  // Frame components
+  TempoFrame,
+  SelectFrame,
+  TrackFrame,
+  MeasureFrame,
+  PatternFrame,
+  WriteFrame,
+  VolumeFrame,
+  DistortionFrame,
+  
+  // Sequencer components
+  StepSequencer,
+  MeasureVisualization,
+  
+  // Core patterns
+  SequencerSubject,
+  CommandManager,
+  StartStopCommand,
+  SetTempoCommand,
+  StoppedState,
+  LinearSequencerStrategy,
+  SequencerContext,
+  AudioFacade
+} from '../../index';
 
 const BehringerRd6 = () => {
-  const audioContextRef = useRef(null);
-  const drumSoundsRef = useRef(null);
-  const masterGainRef = useRef(null);
+  // Initialize our patterns
+  const sequencerSubject = useRef(new SequencerSubject());
+  const commandManager = useRef(new CommandManager());
+  const [currentState, setCurrentState] = useState(new StoppedState());
+  const sequencerContext = useRef(new SequencerContext(new LinearSequencerStrategy()));
+  const audioFacade = useRef(new AudioFacade());
 
-  // Initialize audio context and drum sounds
+  // State for UI
+  const [tempo, setTempo] = useState(120);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentStep, setCurrentStep] = useState(0);
+
+  // Subscribe to sequencer events
   useEffect(() => {
-    audioContextRef.current = new (window.AudioContext || window.webkitAudioContext)();
-    masterGainRef.current = audioContextRef.current.createGain();
-    masterGainRef.current.connect(audioContextRef.current.destination);
-    masterGainRef.current.gain.value = 0.7;
+    const handleSequencerUpdate = (data) => {
+      switch (data.type) {
+        case 'STEP_CHANGE':
+          setCurrentStep(data.step);
+          break;
+        case 'PLAYING_STATE_CHANGE':
+          setIsPlaying(data.isPlaying);
+          break;
+        case 'TEMPO_CHANGE':
+          setTempo(data.tempo);
+          break;
+        default:
+          break;
+      }
+    };
 
-    drumSoundsRef.current = createDrumSounds(audioContextRef.current);
+    sequencerSubject.current.attach({ update: handleSequencerUpdate });
 
     return () => {
-      if (audioContextRef.current) {
-        audioContextRef.current.close();
-      }
+      sequencerSubject.current.detach({ update: handleSequencerUpdate });
+      audioFacade.current.cleanup();
     };
   }, []);
 
-  const handleStepTrigger = (channel, stepIndex) => {
-    if (!drumSoundsRef.current || !audioContextRef.current) return;
+  const handleStartStop = () => {
+    const command = new StartStopCommand(sequencerSubject.current);
+    commandManager.current.execute(command);
+    currentState.handleStartStop();
+  };
 
-    const now = audioContextRef.current.currentTime;
-    let soundNode;
+  const handleTempoChange = (newTempo) => {
+    const command = new SetTempoCommand(sequencerSubject.current, newTempo);
+    commandManager.current.execute(command);
+  };
 
-    switch (channel) {
-      case 'bassDrum':
-        soundNode = drumSoundsRef.current.createBassDrum(now);
-        break;
-      case 'snareDrum':
-        soundNode = drumSoundsRef.current.createSnareDrum(now);
-        break;
-      case 'lowTom':
-        soundNode = drumSoundsRef.current.createLowTom(now);
-        break;
-      case 'highTom':
-        soundNode = drumSoundsRef.current.createHighTom(now);
-        break;
-      case 'cymbal':
-        soundNode = drumSoundsRef.current.createCymbal(now);
-        break;
-      case 'clap':
-        soundNode = drumSoundsRef.current.createClap(now);
-        break;
-      case 'hiHat':
-        soundNode = drumSoundsRef.current.createHiHat(now);
-        break;
-      default:
-        return;
-    }
+  const handleStepTrigger = (channel) => {
+    audioFacade.current.playDrumSound(channel);
+  };
 
-    if (soundNode) {
-      soundNode.connect(masterGainRef.current);
-    }
+  const handleClear = () => {
+    sequencerContext.current.clearPattern();
+    sequencerSubject.current.notify({ type: 'PATTERN_CLEAR' });
+  };
+
+  const handleReset = () => {
+    sequencerContext.current.reset();
+    setCurrentStep(0);
+    sequencerSubject.current.notify({ type: 'PATTERN_RESET' });
+  };
+
+  const handleVolumeChange = (value) => {
+    audioFacade.current.setVolume(value);
+  };
+
+  const handleDistortionChange = (value) => {
+    audioFacade.current.setDistortion(value);
+  };
+
+  const handleAccentChange = (value) => {
+    audioFacade.current.setAccent(value);
+  };
+
+  const handleDrumVolumeChange = (drum, value) => {
+    audioFacade.current.setDrumVolume(drum, value);
   };
 
   return (
@@ -89,42 +131,42 @@ const BehringerRd6 = () => {
           <Knob 
             label="ACCENT" 
             value={0.5} 
-            onChange={(v) => {}}
+            onChange={handleAccentChange}
             steps={10}
             color="#FFD600"
           />
           <Knob 
             label="BASS DRUM" 
             value={0.5} 
-            onChange={(v) => {}}
+            onChange={(v) => handleDrumVolumeChange('bass', v)}
             steps={10}
             color="#FFD600"
           />
           <Knob 
             label="SNARE DRUM" 
             value={0.5} 
-            onChange={(v) => {}}
+            onChange={(v) => handleDrumVolumeChange('snare', v)}
             steps={10}
             color="#FFD600"
           />
           <Knob 
             label="L.H. TOM" 
             value={0.5} 
-            onChange={(v) => {}}
+            onChange={(v) => handleDrumVolumeChange('tom', v)}
             steps={10}
             color="#FFD600"
           />
           <Knob 
             label="CYMBAL/CLAP" 
             value={0.5} 
-            onChange={(v) => {}}
+            onChange={(v) => handleDrumVolumeChange('cymbal', v)}
             steps={10}
             color="#FFD600"
           />
           <Knob 
             label="O.C. HI HAT" 
             value={0.5} 
-            onChange={(v) => {}}
+            onChange={(v) => handleDrumVolumeChange('hihat', v)}
             steps={10}
             color="#FFD600"
           />
@@ -133,7 +175,7 @@ const BehringerRd6 = () => {
           <Knob 
             label="DISTORTION" 
             value={0.5} 
-            onChange={(v) => {}}
+            onChange={handleDistortionChange}
             steps={10}
             color="#FFD600"
           />
@@ -158,8 +200,8 @@ const BehringerRd6 = () => {
           <TempoFrame>
             <Knob 
               label="TEMPO" 
-              value={120} 
-              onChange={(v) => {}}
+              value={tempo} 
+              onChange={handleTempoChange}
               steps={10}
               size={120}
               color="#FFD600"
@@ -204,18 +246,18 @@ const BehringerRd6 = () => {
 
           <DistortionFrame>
             <Knob 
-              label="" 
+              label="DISTORTION" 
               value={0.5} 
-              onChange={(v) => {}}
+              onChange={handleDistortionChange}
               steps={10}
               color="#FFD600"
             />
           </DistortionFrame>
           <VolumeFrame>
             <Knob 
-              label="" 
+              label="VOLUME" 
               value={0.7} 
-              onChange={(v) => {}}
+              onChange={handleVolumeChange}
               steps={10}
               size={120}
               color="#FFD600"
@@ -232,7 +274,11 @@ const BehringerRd6 = () => {
               <div className="rd6-group-buttons">
                 <FunctionButton 
                   label="CLEAR" 
-                  onClick={() => {}}
+                  onClick={handleClear}
+                />
+                <FunctionButton 
+                  label="RESET" 
+                  onClick={handleReset}
                 />
               </div>
             </div>
@@ -241,7 +287,7 @@ const BehringerRd6 = () => {
               <div className="rd6-group-buttons">
                 <FunctionButton 
                   label="START/STOP" 
-                  onClick={() => {}}
+                  onClick={handleStartStop}
                 />
               </div>
             </div>
@@ -258,7 +304,7 @@ const BehringerRd6 = () => {
               <div className="rd6-group-buttons">
                 <FunctionButton 
                   label="MEASURE" 
-                  onClick={() => {}}
+                  onClick={() => currentState.handlePatternChange()}
                 />
               </div>
             </div>
@@ -267,7 +313,7 @@ const BehringerRd6 = () => {
           {/* Third column - Measure visualization and sequencer */}
           <div className="rd6-sequencer-column">
             <div className="rd6-measure-visualization">
-              <MeasureVisualization currentStep={0} />
+              <MeasureVisualization currentStep={currentStep} />
             </div>
             <StepSequencer onStepTrigger={handleStepTrigger} />
           </div>
@@ -278,7 +324,7 @@ const BehringerRd6 = () => {
               <div className="rd6-group-buttons">
                 <FunctionButton 
                   label="PATTERN" 
-                  onClick={() => {}}
+                  onClick={() => currentState.handlePatternChange()}
                 />
               </div>
             </PatternFrame>
@@ -286,7 +332,7 @@ const BehringerRd6 = () => {
               <div className="rd6-group-buttons">
                 <FunctionButton 
                   label="WRITE/NEXT" 
-                  onClick={() => {}}
+                  onClick={() => currentState.handleWrite()}
                 />
               </div>
             </WriteFrame>
