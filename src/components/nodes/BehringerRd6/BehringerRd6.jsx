@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import '../../Node.css';
 import './BehringerRd6.css';
 import './BehringerRd6.frames.css';
@@ -17,38 +17,64 @@ import VolumeFrame from './frames/VolumeFrame';
 import DistortionFrame from './frames/DistortionFrame';
 import StepSequencer from './StepSequencer';
 import MeasureVisualization from './MeasureVisualization';
-import useBehringerRd6 from './useBehringerRd6';
+import { createDrumSounds } from './sounds/drumSounds';
 
 const BehringerRd6 = () => {
-  const {
-    isPlaying,
-    currentStep,
-    steps,
-    params,
-    handleStepClick,
-    handleKnobChange,
-    togglePlay,
-    clearSteps
-  } = useBehringerRd6();
+  const audioContextRef = useRef(null);
+  const drumSoundsRef = useRef(null);
+  const masterGainRef = useRef(null);
 
-  const handleFunctionClick = (action) => {
-    switch(action) {
-      case 'startStop':
-        togglePlay();
+  // Initialize audio context and drum sounds
+  useEffect(() => {
+    audioContextRef.current = new (window.AudioContext || window.webkitAudioContext)();
+    masterGainRef.current = audioContextRef.current.createGain();
+    masterGainRef.current.connect(audioContextRef.current.destination);
+    masterGainRef.current.gain.value = 0.7;
+
+    drumSoundsRef.current = createDrumSounds(audioContextRef.current);
+
+    return () => {
+      if (audioContextRef.current) {
+        audioContextRef.current.close();
+      }
+    };
+  }, []);
+
+  const handleStepTrigger = (channel, stepIndex) => {
+    if (!drumSoundsRef.current || !audioContextRef.current) return;
+
+    const now = audioContextRef.current.currentTime;
+    let soundNode;
+
+    switch (channel) {
+      case 'bassDrum':
+        soundNode = drumSoundsRef.current.createBassDrum(now);
         break;
-      case 'clear':
-        clearSteps();
+      case 'snareDrum':
+        soundNode = drumSoundsRef.current.createSnareDrum(now);
         break;
-      case 'reset':
-        // Implement reset logic
+      case 'lowTom':
+        soundNode = drumSoundsRef.current.createLowTom(now);
         break;
-      // Add other function handlers
+      case 'highTom':
+        soundNode = drumSoundsRef.current.createHighTom(now);
+        break;
+      case 'cymbal':
+        soundNode = drumSoundsRef.current.createCymbal(now);
+        break;
+      case 'clap':
+        soundNode = drumSoundsRef.current.createClap(now);
+        break;
+      case 'hiHat':
+        soundNode = drumSoundsRef.current.createHiHat(now);
+        break;
+      default:
+        return;
     }
-  };
 
-  const handleTopButtonClick = (index) => {
-    // Implement top button click logic here
-    console.log('Top button clicked:', index);
+    if (soundNode) {
+      soundNode.connect(masterGainRef.current);
+    }
   };
 
   return (
@@ -62,43 +88,43 @@ const BehringerRd6 = () => {
         <div className="rd6-section">
           <Knob 
             label="ACCENT" 
-            value={params.accent} 
-            onChange={(v) => handleKnobChange('accent', v)}
+            value={0.5} 
+            onChange={(v) => {}}
             steps={10}
             color="#FFD600"
           />
           <Knob 
             label="BASS DRUM" 
-            value={params.bassDrum} 
-            onChange={(v) => handleKnobChange('bassDrum', v)}
+            value={0.5} 
+            onChange={(v) => {}}
             steps={10}
             color="#FFD600"
           />
           <Knob 
             label="SNARE DRUM" 
-            value={params.snareDrum} 
-            onChange={(v) => handleKnobChange('snareDrum', v)}
+            value={0.5} 
+            onChange={(v) => {}}
             steps={10}
             color="#FFD600"
           />
           <Knob 
             label="L.H. TOM" 
-            value={params.lowTom} 
-            onChange={(v) => handleKnobChange('lowTom', v)}
+            value={0.5} 
+            onChange={(v) => {}}
             steps={10}
             color="#FFD600"
           />
           <Knob 
             label="CYMBAL/CLAP" 
-            value={params.cymbal} 
-            onChange={(v) => handleKnobChange('cymbal', v)}
+            value={0.5} 
+            onChange={(v) => {}}
             steps={10}
             color="#FFD600"
           />
           <Knob 
             label="O.C. HI HAT" 
-            value={params.hiHat} 
-            onChange={(v) => handleKnobChange('hiHat', v)}
+            value={0.5} 
+            onChange={(v) => {}}
             steps={10}
             color="#FFD600"
           />
@@ -106,22 +132,22 @@ const BehringerRd6 = () => {
           <Jack label="OUT" />
           <Knob 
             label="DISTORTION" 
-            value={params.distortion} 
-            onChange={(v) => handleKnobChange('distortion', v)}
+            value={0.5} 
+            onChange={(v) => {}}
             steps={10}
             color="#FFD600"
           />
           <Knob 
             label="TONE" 
-            value={params.tone} 
-            onChange={(v) => handleKnobChange('tone', v)}
+            value={0.5} 
+            onChange={(v) => {}}
             steps={10}
             color="#FFD600"
           />
           <Knob 
             label="LEVEL" 
-            value={params.level} 
-            onChange={(v) => handleKnobChange('level', v)}
+            value={0.7} 
+            onChange={(v) => {}}
             steps={10}
             color="#FFD600"
           />
@@ -131,35 +157,38 @@ const BehringerRd6 = () => {
         <div className="rd6-center-row">
           <TempoFrame>
             <Knob 
-              label="" 
-              value={params.tempo} 
-              onChange={(v) => handleKnobChange('tempo', v)}
+              label="TEMPO" 
+              value={120} 
+              onChange={(v) => {}}
               steps={10}
               size={120}
               color="#FFD600"
             />
           </TempoFrame>
           <SelectFrame>
-            <Switch 
-              label="" 
-              value={params.select} 
-              onChange={(v) => handleKnobChange('select', v)}
+            <Knob 
+              label="SELECT" 
+              value={0.5} 
+              onChange={(v) => {}}
+              steps={10}
+              size={120}
               color="#FFD600"
             />
           </SelectFrame>
           <TrackFrame>
             <Knob 
-              label="" 
-              value={params.track} 
-              onChange={(v) => handleKnobChange('track', v)}
-              steps={8}
+              label="TRACK" 
+              value={0.5} 
+              onChange={(v) => {}}
+              steps={10}
+              size={120}
               color="#FFD600"
             />
           </TrackFrame>
           <Knob 
             label="MODE" 
-            value={params.mode === 'pattern' ? 0.5 : 0} 
-            onChange={(v) => handleKnobChange('mode', v > 0.25 ? 'pattern' : 'write')}
+            value={0.5} 
+            onChange={(v) => {}}
             steps={2}
             color="#FFD600"
           />
@@ -174,18 +203,19 @@ const BehringerRd6 = () => {
           </div>
 
           <DistortionFrame>
-            <Switch 
+            <Knob 
               label="" 
-              value={params.distortion} 
-              onChange={(v) => handleKnobChange('distortion', v)}
+              value={0.5} 
+              onChange={(v) => {}}
+              steps={10}
               color="#FFD600"
             />
           </DistortionFrame>
           <VolumeFrame>
             <Knob 
               label="" 
-              value={params.volume} 
-              onChange={(v) => handleKnobChange('volume', v)}
+              value={0.7} 
+              onChange={(v) => {}}
               steps={10}
               size={120}
               color="#FFD600"
@@ -202,7 +232,7 @@ const BehringerRd6 = () => {
               <div className="rd6-group-buttons">
                 <FunctionButton 
                   label="CLEAR" 
-                  onClick={() => handleFunctionClick('clear')}
+                  onClick={() => {}}
                 />
               </div>
             </div>
@@ -211,8 +241,7 @@ const BehringerRd6 = () => {
               <div className="rd6-group-buttons">
                 <FunctionButton 
                   label="START/STOP" 
-                  isActive={isPlaying}
-                  onClick={() => handleFunctionClick('startStop')}
+                  onClick={() => {}}
                 />
               </div>
             </div>
@@ -221,15 +250,15 @@ const BehringerRd6 = () => {
           {/* Second column - Measure switch and button */}
           <MeasureFrame>
             <FourPositionSwitch 
-              value={params.measure}
-              onChange={(v) => handleKnobChange('measure', v)}
+              value={1}
+              onChange={(v) => {}}
               color="#FFD600"
             />
             <div className="rd6-measure-button-group">
               <div className="rd6-group-buttons">
                 <FunctionButton 
                   label="MEASURE" 
-                  onClick={() => handleFunctionClick('measure')}
+                  onClick={() => {}}
                 />
               </div>
             </div>
@@ -238,14 +267,9 @@ const BehringerRd6 = () => {
           {/* Third column - Measure visualization and sequencer */}
           <div className="rd6-sequencer-column">
             <div className="rd6-measure-visualization">
-              <MeasureVisualization currentStep={currentStep} />
+              <MeasureVisualization currentStep={0} />
             </div>
-            <StepSequencer 
-              steps={steps}
-              currentStep={currentStep}
-              onStepClick={handleStepClick}
-              onTopButtonClick={handleTopButtonClick}
-            />
+            <StepSequencer onStepTrigger={handleStepTrigger} />
           </div>
 
           {/* Fourth column - Pattern and write controls */}
@@ -254,7 +278,7 @@ const BehringerRd6 = () => {
               <div className="rd6-group-buttons">
                 <FunctionButton 
                   label="PATTERN" 
-                  onClick={() => handleFunctionClick('patternGroup')}
+                  onClick={() => {}}
                 />
               </div>
             </PatternFrame>
@@ -262,7 +286,7 @@ const BehringerRd6 = () => {
               <div className="rd6-group-buttons">
                 <FunctionButton 
                   label="WRITE/NEXT" 
-                  onClick={() => handleFunctionClick('writeNext')}
+                  onClick={() => {}}
                 />
               </div>
             </WriteFrame>
