@@ -1,10 +1,10 @@
 
-import ElektronDigitakt from '../components/nodes/ElektronDigitakt';
 import BehringerTd3 from '../components/nodes/BehringerTd3';
 import StrymonBlueSky from '../components/nodes/StrymonBlueSky';
 import BossDd8 from '../components/nodes/BossDd8';
 import BehringerXenyx802 from '../components/nodes/BehringerXenyx802';
 import { BehringerRd6 } from '../components/nodes/BehringerRd6';
+import ElektronDigitakt from '@/components/nodes/ElektronDigitakt/components/ElektronDigitakt/ElektronDigitakt';
 
 export const nodeTypes = {
   BehringerRd6,
