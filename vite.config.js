@@ -17,7 +17,8 @@ export default defineConfig({
       '@rd6/patterns': path.resolve(__dirname, './src/components/nodes/BehringerRd6/core/patterns'),
       '@rd6/common': path.resolve(__dirname, './src/components/nodes/BehringerRd6/components/common'),
       '@rd6/frames': path.resolve(__dirname, './src/components/nodes/BehringerRd6/components/frames'),
-      '@rd6/sequencer': path.resolve(__dirname, './src/components/nodes/BehringerRd6/components/sequencer')
+      '@rd6/sequencer': path.resolve(__dirname, './src/components/nodes/BehringerRd6/components/sequencer'),
+      '@elektrond': path.resolve(__dirname, './src/components/nodes/ElektronDigitakt')
     }
   }
 })

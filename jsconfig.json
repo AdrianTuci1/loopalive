@@ -12,7 +12,8 @@
       "@rd6/patterns/*": ["components/nodes/BehringerRd6/core/patterns/*"],
       "@rd6/common/*": ["components/nodes/BehringerRd6/components/common/*"],
       "@rd6/frames/*": ["components/nodes/BehringerRd6/components/frames/*"],
-      "@rd6/sequencer/*": ["components/nodes/BehringerRd6/components/sequencer/*"]
+      "@rd6/sequencer/*": ["components/nodes/BehringerRd6/components/sequencer/*"],
+      "@elektrond/*": ["components/nodes/ElektronDigitakt/*"]
     }
   },
   "include": ["src/**/*"],
